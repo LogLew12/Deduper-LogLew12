@@ -7,7 +7,7 @@ def get_args():
     )
     parser.add_argument("-u", "--umi", help="file containing all known umis (one on each line)", required=True)
     parser.add_argument("-f", "--file", help="input file name", required=True)
-    parser.add_argument("-p", "--paired", nargs ='?', const='paired', default='single', help="output file name")
+    parser.add_argument("-p", "--paired", nargs ='?', const='paired', default='single', help="include if your data is paired end")
     return parser.parse_args()
 
 args = get_args()
@@ -15,6 +15,8 @@ args = get_args()
 #checking if user flagged their data as paired end
 if args.paired == 'paired':
     raise Exception("This program does not yet support paired-end data")
+elif args.paired != 'single':
+    raise Exception("This program does not yet support paired-end data. If your data is not paired end, please remove the -p/--paired option.")
 
 #creating a list of all given umis
 umis = []
